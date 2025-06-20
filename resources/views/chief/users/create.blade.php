@@ -1,127 +1,82 @@
-<!DOCTYPE html>
-<html lang="uk">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Створити користувача</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            padding: 20px;
-            background: #f7fafc;
-        }
-        h2 {
-            font-weight: 600;
-            font-size: 1.25rem;
-            color: #2d3748;
-            margin-bottom: 20px;
-        }
-        form {
-            max-width: 600px;
-            background: white;
-            padding: 20px;
-            border-radius: 6px;
-            box-shadow: 0 1px 3px rgb(0 0 0 / 0.1);
-        }
-        label {
-            display: block;
-            font-weight: 600;
-            margin-bottom: 6px;
-            color: #4a5568;
-        }
-        input[type="text"],
-        input[type="email"],
-        input[type="password"],
-        select {
-            width: 100%;
-            padding: 8px 12px;
-            border: 1px solid #cbd5e0;
-            border-radius: 4px;
-            margin-bottom: 15px;
-            font-size: 1rem;
-            box-sizing: border-box;
-        }
-        .buttons {
-            display: flex;
-            gap: 10px;
-        }
-        button, a.button-link {
-            padding: 10px 16px;
-            font-weight: 600;
-            border-radius: 4px;
-            text-decoration: none;
-            cursor: pointer;
-            display: inline-block;
-            text-align: center;
-        }
-        button {
-            background-color: #48bb78; /* green-600 */
-            color: white;
-            border: none;
-        }
-        button:hover {
-            background-color: #38a169; /* green-700 */
-        }
-        a.button-link {
-            background-color: #718096; /* gray-500 */
-            color: white;
-        }
-        a.button-link:hover {
-            background-color: #4a5568; /* gray-600 */
-        }
-        .error {
-            color: #e53e3e;
-            font-size: 0.875rem;
-            margin-top: -12px;
-            margin-bottom: 10px;
-        }
-    </style>
-</head>
-<body>
+@extends('layouts.app')
 
-    <h2>Створити користувача</h2>
+@section('header')
+    <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        {{ __('Створити користувача') }}
+    </h2>
+@endsection
 
-    <form action="{{ route('chief.users.store') }}" method="POST">
-        @csrf
+@section('content')
+    <div class="max-w-2xl mx-auto bg-white p-6 rounded shadow">
+        <form action="{{ route('chief.users.store') }}" method="POST" class="space-y-4">
+            @csrf
 
-        <label for="name">Ім'я</label>
-        <input type="text" id="name" name="name" value="{{ old('name') }}" required>
-        @error('name')
-            <p class="error">{{ $message }}</p>
-        @enderror
+            <div>
+                <label for="name" class="block text-sm font-medium text-gray-700">Ім'я</label>
+                <input type="text" id="name" name="name" value="{{ old('name') }}"
+                       class="form-input mt-1 block w-full rounded border-gray-300 shadow-sm focus:ring focus:ring-blue-200"
+                       required>
+                @error('name')
+                    <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+                @enderror
+            </div>
 
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" value="{{ old('email') }}" required>
-        @error('email')
-            <p class="error">{{ $message }}</p>
-        @enderror
+            <div>
+                <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                <input type="email" id="email" name="email" value="{{ old('email') }}"
+                       class="form-input mt-1 block w-full rounded border-gray-300 shadow-sm focus:ring focus:ring-blue-200"
+                       required>
+                @error('email')
+                    <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+                @enderror
+            </div>
 
-        <label for="password">Пароль</label>
-        <input type="password" id="password" name="password" required>
-        @error('password')
-            <p class="error">{{ $message }}</p>
-        @enderror
+            <div>
+                <label for="password" class="block text-sm font-medium text-gray-700">Пароль</label>
+                <input type="password" id="password" name="password"
+                       class="form-input mt-1 block w-full rounded border-gray-300 shadow-sm focus:ring focus:ring-blue-200"
+                       required>
+                @error('password')
+                    <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+                @enderror
+            </div>
 
-        <label for="password_confirmation">Підтвердження пароля</label>
-        <input type="password" id="password_confirmation" name="password_confirmation" required>
+            <div>
+                <label for="password_confirmation" class="block text-sm font-medium text-gray-700">Підтвердження пароля</label>
+                <input type="password" id="password_confirmation" name="password_confirmation"
+                       class="form-input mt-1 block w-full rounded border-gray-300 shadow-sm focus:ring focus:ring-blue-200"
+                       required>
+            </div>
 
-        <label for="role">Роль</label>
-        <select id="role" name="role" required>
-            <option value="">Оберіть роль</option>
-            <option value="1" {{ old('role') == '1' ? 'selected' : '' }}>Завідувач</option>
-            <option value="2" {{ old('role') == '2' ? 'selected' : '' }}>Адміністратор</option>
-            <option value="3" {{ old('role') == '3' ? 'selected' : '' }}>Лікар</option>
-            <option value="4" {{ old('role') == '4' ? 'selected' : '' }}>Медсестра</option>
-        </select>
-        @error('role')
-            <p class="error">{{ $message }}</p>
-        @enderror
+            <div>
+                <label for="role" class="block text-sm font-medium text-gray-700">Роль</label>
+                <select id="role" name="role"
+                        class="form-select mt-1 block w-full rounded border-gray-300 shadow-sm focus:ring focus:ring-blue-200"
+                        required>
+                    <option value="">Оберіть роль</option>
+                    <option value="1" {{ old('role') == '1' ? 'selected' : '' }}>Завідувач</option>
+                    <option value="2" {{ old('role') == '2' ? 'selected' : '' }}>Адміністратор</option>
+                    <option value="3" {{ old('role') == '3' ? 'selected' : '' }}>Лікар</option>
+                    <option value="4" {{ old('role') == '4' ? 'selected' : '' }}>Медсестра</option>
+                    <option value="5" {{ old('role') == '5' ? 'selected' : '' }}>Фармацевт</option>
+                    <option value="6" {{ old('role') == '6' ? 'selected' : '' }}>АдміністраторФарма</option>
+                </select>
+                @error('role')
+                    <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+                @enderror
+            </div>
 
-        <div class="buttons">
-            <button type="submit">Створити</button>
-            <a href="{{ route('chief.users.index') }}" class="button-link">Скасувати</a>
-        </div>
-    </form>
+            <div class="flex items-center gap-3 pt-4">
+                <button type="submit"
+                        class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded shadow text-sm">
+                    Створити
+                </button>
 
-</body>
-</html>
+                <a href="{{ route('chief.users.index') }}"
+                   class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded shadow text-sm inline-block">
+                    Скасувати
+                </a>
+            </div>
+        </form>
+    </div>
+@endsection

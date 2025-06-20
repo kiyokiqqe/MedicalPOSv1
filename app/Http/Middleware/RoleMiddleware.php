@@ -29,10 +29,8 @@ class RoleMiddleware
             'admin' => 2,
             'doctor' => 3,
             'nurse' => 4,
-            //
             'pharmacist' => 5,
             'adminpharmacist' => 6,
-            //
             'chief_or_admin' => [1, 2],
         ];
 

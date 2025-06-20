@@ -44,14 +44,30 @@
                             <td class="border border-gray-300 px-4 py-2">{{ $user->email }}</td>
                             <td class="border border-gray-300 px-4 py-2">{{ ucfirst($user->role) }}</td>
                             <td class="border border-gray-300 px-4 py-2">
-                                <a href="{{ route('chief.users.show', $user->id) }}" class="text-blue-600 hover:underline">Переглянути</a> |
-                                <a href="{{ route('chief.users.edit', $user->id) }}" class="text-green-600 hover:underline">Редагувати</a> |
-                                <form action="{{ route('chief.users.destroy', $user->id) }}" method="POST" class="inline-block" onsubmit="return confirm('Видалити користувача?');">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="text-red-600 hover:underline">Видалити</button>
-                                </form>
-                            </td>
+    <div class="flex flex-wrap gap-2">
+        <a href="{{ route('chief.users.show', $user->id) }}"
+           class="bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded text-sm shadow">
+            Переглянути
+        </a>
+
+        <a href="{{ route('chief.users.edit', $user->id) }}"
+           class="bg-amber-500 hover:bg-amber-600 text-white px-3 py-1 rounded text-sm shadow">
+            Редагувати
+        </a>
+
+        <form action="{{ route('chief.users.destroy', $user->id) }}"
+              method="POST"
+              class="inline"
+              onsubmit="return confirm('Видалити користувача?');">
+            @csrf
+            @method('DELETE')
+            <button type="submit"
+                    class="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded text-sm shadow">
+                Видалити
+            </button>
+        </form>
+    </div>
+</td>
                         </tr>
                     @endforeach
                 </tbody>

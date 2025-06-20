@@ -27,7 +27,7 @@
     <table class="w-full table-auto border-collapse border border-gray-300">
         <thead>
             <tr>
-                <th class="border border-gray-300 px-4 py-2">ID</th>
+                <!-- <th class="border border-gray-300 px-4 py-2">ID</th> -->
                 <th class="border border-gray-300 px-4 py-2">Ім'я</th>
                 <th class="border border-gray-300 px-4 py-2">Дата народження</th>
                 <th class="border border-gray-300 px-4 py-2">Стать</th>
@@ -38,7 +38,7 @@
         <tbody>
             @foreach($patients as $patient)
                 <tr>
-                    <td class="border border-gray-300 px-4 py-2">{{ $patient->id }}</td>
+                    <!-- <td class="border border-gray-300 px-4 py-2">{{ $patient->id }}</td> -->
                     <td class="border border-gray-300 px-4 py-2">{{ $patient->name }}</td>
                     <td class="border border-gray-300 px-4 py-2">{{ $patient->birth_date->format('d.m.Y') }}</td>
                     <td class="border border-gray-300 px-4 py-2">{{ $patient->gender == 'male' ? 'Чоловік' : 'Жінка' }}</td>

@@ -37,8 +37,7 @@
                         <td class="border border-gray-300 p-2">{{ $patient->gender == 'male' ? 'Чоловік' : 'Жінка' }}</td>
                         <td class="border border-gray-300 p-2">{{ $patient->phone }}</td>
                         <td class="border border-gray-300 p-2">
-                            <a href="{{ route('nurse.patients.show', $patient) }}" class="text-blue-600 hover:underline">Переглянути</a> |
-                            <a href="{{ route('nurse.patients.edit', $patient) }}" class="text-yellow-600 hover:underline">Редагувати</a>
+                            <a href="{{ route('nurse.patients.show', $patient) }}" class="text-blue-600 hover:underline">Переглянути</a>
                         </td>
                     </tr>
                 @endforeach

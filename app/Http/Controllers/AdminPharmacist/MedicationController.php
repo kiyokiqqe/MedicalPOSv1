@@ -8,9 +8,28 @@ use Illuminate\Http\Request;
 
 class MedicationController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $medications = Medication::all();
+        $query = Medication::query();
+
+        if ($request->filled('name')) {
+            $query->where('name', 'like', '%' . $request->name . '%');
+        }
+
+        if ($request->filled('code')) {
+            $query->where('code', 'like', '%' . $request->code . '%');
+        }
+
+        if ($request->filled('arrival_date')) {
+            $query->whereDate('arrival_date', $request->arrival_date);
+        }
+
+        if ($request->filled('expiration_date')) {
+            $query->whereDate('expiration_date', $request->expiration_date);
+        }
+
+        $medications = $query->orderByDesc('created_at')->get();
+
         return view('adminpharmacist.medications.index', compact('medications'));
     }
 

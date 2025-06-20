@@ -10,38 +10,26 @@ class NursePatientController extends Controller
 {
     public function index()
     {
-        // Вибираємо пацієнтів, яких бачить медсестра
+        // Показати список пацієнтів (можна обмежити, якщо потрібно)
         $patients = Patient::paginate(10);
         return view('nurse.patients.index', compact('patients'));
     }
 
     public function show(Patient $patient)
     {
-        // Перегляд деталей пацієнта
-        return view('nurse.patients.show', compact('patient'));
+        // Показати медичну картку пацієнта, якщо вона є
+        $medicalCard = $patient->medicalCard;
+
+        return view('nurse.patients.show', compact('patient', 'medicalCard'));
     }
 
     public function edit(Patient $patient)
     {
-        // Форма редагування пацієнта
-        return view('nurse.patients.edit', compact('patient'));
+        abort(403, 'Редагування пацієнтів для медсестри заборонено.');
     }
 
     public function update(Request $request, Patient $patient)
     {
-        $data = $request->validate([
-            'name' => 'required|string|max:255',
-            'birth_date' => 'required|date',
-            'gender' => 'required|in:male,female',
-            'phone' => 'required|string|max:20',
-        ]);
-
-        $patient->update($data);
-
-        return redirect()->route('nurse.patients.index')
-            ->with('success', 'Пацієнта успішно оновлено.');
+        abort(403, 'Оновлення пацієнтів для медсестри заборонено.');
     }
-
-    // Медсестра не має права створювати або видаляти пацієнтів,
-    // тому методи create, store, destroy можна не реалізовувати або захистити middleware.
-}
+}   

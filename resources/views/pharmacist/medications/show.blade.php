@@ -14,13 +14,6 @@
             <div><strong>Дата придатності:</strong> {{ $medication->expiration_date ?? '—' }}</div>
             <div><strong>Опис:</strong> {{ $medication->description ?? '—' }}</div>
 
-            <form action="{{ route('pharmacist.medications.request', $medication) }}" method="POST">
-                @csrf
-                <button type="submit" class="mt-4 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded shadow">
-                    Подати запит на видачу
-                </button>
-            </form>
-
             <a href="{{ route('pharmacist.medications.index') }}" class="inline-block mt-4 text-gray-700 underline">
                 ← Назад
             </a>

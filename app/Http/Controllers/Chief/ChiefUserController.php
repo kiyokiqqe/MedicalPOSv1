@@ -27,7 +27,7 @@ class ChiefUserController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
-            'role' => 'required|integer|in:1,2,3,4',
+            'role' => 'required|integer|in:1,2,3,4,5,6',
             'password' => 'required|string|min:6|confirmed',
         ]);
 
@@ -36,7 +36,7 @@ class ChiefUserController extends Controller
             'email' => $request->email,
             'role' => $request->role,
             'password' => bcrypt($request->password),
-            'status' => 1, // або за замовчуванням, якщо потрібно
+            'status' => 1, 
         ]);
 
         return redirect()->route('chief.users.index')->with('success', 'Користувача створено');

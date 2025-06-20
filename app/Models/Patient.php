@@ -9,24 +9,24 @@ class Patient extends Model
 {
     use HasFactory;
 
-    /**
-     * Масово призначувані атрибути.
-     *
-     * @var array
-     */
-    protected $fillable = [
+        protected $fillable = [
         'name',
         'birth_date',
         'gender',
         'phone',
     ];
 
-    /**
-     * Приведення атрибутів.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'birth_date' => 'date',  // Автоматичне приведення до Carbon
+        protected $casts = [
+        'birth_date' => 'date',
     ];
+
+    public function medicalCard()
+    {
+        return $this->hasOne(MedicalCard::class);
+    }
+
+    public function recommendations()
+    {
+        return $this->hasMany(Recommendation::class);
+    }
 }
